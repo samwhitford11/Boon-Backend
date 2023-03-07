@@ -1,6 +1,6 @@
 # bOOn
 
-##### This app lets users keep track of gift ideas and share personal gift ideas with others. Users will be able to add a person they wish to make a gift registry. Users will be able to see the list of gift ideas per person. they will visit, click on one and view an individual destination, delete and update that destination as well as check it off as visited.
+##### This app lets users keep track of gift ideas and share personal gift ideas with others. Users will be able to add a person they wish to make a gift registry. Users will be able to see the list of gift ideas per person. They will click on one and view an individual gift, delete and update that gift as well as check it off as purchased.
 
 
 [Trello Board Link]()
