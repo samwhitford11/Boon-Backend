@@ -30,8 +30,8 @@ Outlet -- "/places/delete/:id" --> deleteAction
 
 | Route | Element | Loader | Action | Summary |
 | ----- | ------- | ------ | ------ | ------- |
-| /     | Index   | indexLoader |   | Loads up list of places |         |
-| /gifts/:id | Show | showLoader |  | Loads up an individual place | 
+| /     | Index   | indexLoader |   | Loads up list of individuals  |         |
+| /gifts/:id | Show | showLoader |  | Loads up an individual's gift registry | 
 | /gifts/create | Create|        | createAction | Handles submission of create form for one gift idea | 
 | /gifts/update/:id | Update  |   | updateAction | Handles submission of update form for one gift idea  | 
 | /gifts/delete/:id | Delete  |   | deleteAction | Handles submission of delete form for one gift idea |  
