@@ -82,7 +82,7 @@ app.post("/linkgift/:personid/:giftid", async (req, res) => {
     res.json(person)
 });
 
-// UPDATE ROUTE
+// UPDATE ROUTE  
 app.put("/gift/:id", async (req, res) => {
     try{
         res.json(await Gift.findByIdAndUpdate(req.params.id, req.body, {new: true}))
