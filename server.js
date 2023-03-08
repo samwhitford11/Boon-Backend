@@ -94,7 +94,7 @@ app.put("/gift/:id", async (req, res) => {
 // DELETE ROUTE
 app.delete("/gift/:id", async (req, res) => {
     try{
-        res.json(await Gift.findByIdAndDelete(req.params.id));
+        res.json(await Gifts.findByIdAndDelete(req.params.id));
     }catch (error){
         res.status(400).json(error);
     }
