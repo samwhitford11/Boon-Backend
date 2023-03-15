@@ -56,66 +56,66 @@ const Gifts = mongoose.model("Gifts", GiftSchema);
 app.get("/", (req, res) => {
   res.send("Boon App");
 });
-
-// PERSON INDEX ROUTE
+////////////////////////////////////////////////////////////////////
+// PERSON ROUTES
+////////////////////////////////////////////////////////////////////
+// PERSON INDEX ROUTE //works
 app.get("/people", async (req, res) => {
-    res.json(await Person.find({})
-    .populate("gifts"));  
+    res.json(await Person.find({}));  
 });
 
-// PERSON CREATE ROUTE
+// PERSON CREATE ROUTE //works
 app.post("/addperson", async (req, res) => {
         res.json(await Person.create(req.body))
 });
 
-// GIFT CREATE ROUTE
-app.post("/addgift", async (req, res) => {
-    res.json(await Gifts.create(req.body))
+// PERSON UPDATE ROUTE //
+app.put("/people/:id", async (req, res) => {
+    res.json(await Person.findByIdAndUpdate(req.params.id, req.body, {new: true}))
 });
 
-// LINKED CREATE ROUTE - SHOW?
-app.post("/linkgift/:personid/:giftid", async (req, res) => {
-    const person = await Person.findById(req.params.personid)
-    const gift = await Gifts.findById(req.params.giftid)
-    person.gifts.push(gift)
-    person.save()
-    res.json(person)
+//PERSON DELETE ROUTE
+app.delete("/people/:id", async (req, res) => {
+    res.json(await Person.findByIdAndDelete(req.params.id));
 });
 
-// SHOW ROUTE
-app.get("/linkgift/:personid", async (req, res) => {
+// SHOW PEOPLE ROUTE
+app.get("/people/:personid", async (req, res) => {
     // res.json(await Person.findById(req.params.personid))
     const person = await Person.findById(req.params.personid).populate("gifts")
     res.json(person)
 });
 
-// GIFT EDIT ROUTE
+////////////////////////////////////////////////////////////////////
+// GIFT ROUTES
+////////////////////////////////////////////////////////////////////
+// GIFT CREATE ROUTE
+app.post("/addgift/:personid", async (req, res) => {
+    // find the person of the id from req obj
+    // create a var and assign it to the result of a mongoose method to find a doc with the schema of the Person model with the id matching the req param with the ref field gifts populated
+    const person = await Person.findById(req.params.personid).populate("gifts")
+    // create new gift from the form data 
+    const gift = await Gifts.create(req.body)
+    // attach new gift to person
+    person.gifts.push(gift)
+    // save person's data
+    person.save()
+    // respond w found person
+    res.json(person)
+
+});
 
 // GIFT UPDATE ROUTE  
 app.put("/gift/:id", async (req, res) => {
-        res.json(await Gift.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+        res.json(await Gifts.findByIdAndUpdate(req.params.id, req.body, {new: true}))
 });
-
-// PERSON UPDATE ROUTE
 
 // GIFT DELETE ROUTE
 app.delete("/gift/:id", async (req, res) => {
         res.json(await Gifts.findByIdAndDelete(req.params.id));
 });
 
-//PERSON DELETE ROUTE
-
-
-
-
-
 ///////////////////////////////
 // LISTENER
 ////////////////////////////////
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
-
-
-
-//personid 6408f5dba2706db687311b0c
-
-//giftid 6408f811ef59ef5d3dbbe21b
