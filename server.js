@@ -56,9 +56,10 @@ const Gifts = mongoose.model("Gifts", GiftSchema);
 app.get("/", (req, res) => {
   res.send("Boon App");
 });
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////
 // PERSON ROUTES
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////
+
 // PERSON INDEX ROUTE //works
 app.get("/people", async (req, res) => {
     res.json(await Person.find({}));  
@@ -69,27 +70,27 @@ app.post("/addperson", async (req, res) => {
         res.json(await Person.create(req.body))
 });
 
-// PERSON UPDATE ROUTE //
+// PERSON UPDATE ROUTE //works
 app.put("/people/:id", async (req, res) => {
     res.json(await Person.findByIdAndUpdate(req.params.id, req.body, {new: true}))
 });
 
-//PERSON DELETE ROUTE
+//PERSON DELETE ROUTE //works
 app.delete("/people/:id", async (req, res) => {
     res.json(await Person.findByIdAndDelete(req.params.id));
 });
 
-// SHOW PEOPLE ROUTE
+// SHOW PEOPLE ROUTE //works
 app.get("/people/:personid", async (req, res) => {
-    // res.json(await Person.findById(req.params.personid))
     const person = await Person.findById(req.params.personid).populate("gifts")
     res.json(person)
 });
 
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////
 // GIFT ROUTES
-////////////////////////////////////////////////////////////////////
-// GIFT CREATE ROUTE
+////////////////////////////////////////////////
+
+// GIFT CREATE ROUTE //works
 app.post("/addgift/:personid", async (req, res) => {
     // find the person of the id from req obj
     // create a var and assign it to the result of a mongoose method to find a doc with the schema of the Person model with the id matching the req param with the ref field gifts populated
@@ -105,12 +106,12 @@ app.post("/addgift/:personid", async (req, res) => {
 
 });
 
-// GIFT UPDATE ROUTE  
+// GIFT UPDATE ROUTE //works
 app.put("/gift/:id", async (req, res) => {
         res.json(await Gifts.findByIdAndUpdate(req.params.id, req.body, {new: true}))
 });
 
-// GIFT DELETE ROUTE
+// GIFT DELETE ROUTE //works
 app.delete("/gift/:id", async (req, res) => {
         res.json(await Gifts.findByIdAndDelete(req.params.id));
 });
