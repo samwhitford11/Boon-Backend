@@ -8,7 +8,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const DATABASE_URL = process.env.DATABASE_URL
 const PORT = process.env.PORT
-// create express app
+// create express app/ server
 const express = require("express");
 const app = express();
 
@@ -18,6 +18,7 @@ const app = express();
   app.use(cors()); 
   app.use(morgan("dev")); 
   app.use(express.json()); 
+  app.use(express.urlencoded({extended: true}))
   
 ///////////////////////////////
 // DATABASE CONNECTION
